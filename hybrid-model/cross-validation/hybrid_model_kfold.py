@@ -1,14 +1,3 @@
-#!/usr/bin/env python3
-"""
-Hybrid Model K-Fold Cross-Validation (BigPlants-100)
-
-This script reuses components from hybrid_model.py and adds:
-  - Stratified 5-fold CV (configurable)
-  - Per-fold training/evaluation outputs
-  - Per-fold best_model.pt / training_history.pt
-  - Aggregated kfold_results.csv + summary
-"""
-
 import os
 import argparse
 import random
@@ -465,4 +454,3 @@ if __name__ == "__main__":
 		torch.cuda.manual_seed_all(args.seed)
 
 	main(args)
-

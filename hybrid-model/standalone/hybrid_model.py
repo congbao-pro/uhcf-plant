@@ -1,30 +1,3 @@
-#!/usr/bin/env python3
-"""
-Hybrid model for BigPlants-100 classification:
-  - Organ-Aware Switch-ViT branch
-  - DINOv2 branch
-  - SegFormer branch
-  - Fusion head for final prediction
-
-Design goals (aligned with organ_aware_switch_vit.py):
-  - Priority-based image selection per class
-  - Save dataset_selected.csv / dataset_unselected.csv / train.csv / val.csv / test.csv
-  - pHash leakage detection and fixing strategy
-  - Pseudo-organ mining on TRAIN only (no leakage)
-  - Comprehensive metrics (Macro/Micro/Weighted F1, accuracy, per-class report, confusion matrix)
-  - Save best_model.pt / training_history.pt
-  - Detailed timing logs (start/end/epoch duration)
-
-Usage example:
-python hybrid_model.py \
-  --data_root "/home/bigplants/dataset/bigplants-100-resized-224x224" \
-  --out_dir "./outputs_hybrid" \
-  --vit_name "vit_base_patch16_224" \
-  --dino_model_name "dinov2_vitb14" \
-  --segformer_model_name "nvidia/segformer-b1-finetuned-ade-512-512" \
-  --epochs 40 --batch_size 16 --max_per_class 100 --lr 1e-4 --val_split 0.1 --test_split 0.2 --top_k 2
-"""
-
 import os
 import csv
 import math
@@ -1141,7 +1114,7 @@ class HybridPlantModel(nn.Module):
 		d_ff_expert=1024,
 		vit_name="vit_base_patch16_224",
 		dino_model_name="dinov2_vitb14",
-		segformer_model_name="nvidia/segformer-b0-finetuned-ade-512-512",
+		segformer_model_name="nvidia/segformer-b1-finetuned-ade-512-512",
 		dropout=0.1,
 		top_k=1,
 		freeze_dino=True,
@@ -1438,7 +1411,7 @@ def main(args):
 	print(f"[INFO] train_ds={len(train_loader.dataset)}, val_ds={len(val_loader.dataset)}, test_ds={len(test_loader.dataset)}")
 
 	# 5) Create hybrid model
-	print("\n[STEP 5] Creating Hybrid model (Organ-Aware + DINOv2 + SegFormer)...")
+	print("\n[STEP 5] Creating Hybrid model...")
 	model = HybridPlantModel(
 		n_classes=len(classes),
 		organ_dim=args.n_org_clusters,
@@ -1585,7 +1558,7 @@ def main(args):
 
 
 def build_arg_parser():
-	parser = argparse.ArgumentParser(description="Hybrid Organ-Aware + DINOv2 + SegFormer for BigPlants-100")
+	parser = argparse.ArgumentParser(description="Hybrid Organ-Aware V-MoE + DINOv2 + SegFormer for BigPlants-100")
 
 	# data
 	parser.add_argument("--data_root", type=str, required=True, help="Path to dataset root containing 100 class folders")

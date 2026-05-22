@@ -1,14 +1,3 @@
-#!/usr/bin/env python3
-"""
-Load best_model.pt and training_history.pt for:
-1. Detect classes for unselected images
-2. Measure inference time per image
-3. Visualize training history with detailed plots
-
-Usage:
-    python load_hybrid_model_to_detect.py --model_path ./outputs/best_model.pt --history_path ./outputs/training_history.pt --unselected_csv ./outputs/dataset_unselected.csv --out_dir ./outputs/analysis
-"""
-
 import os
 import argparse
 import time
@@ -245,7 +234,6 @@ def detect_unselected_images(model, unselected_csv, class_to_idx, organ_dim, kme
 def visualize_training_history(history_path, out_dir):
     """Comprehensive visualization of training history"""
     print(f"\n[VISUALIZATION] Loading training history from {history_path}")
-    # Tương tự checkpoint, ép weights_only=False để đọc dict đầy đủ.
     try:
         history = torch.load(history_path, map_location='cpu', weights_only=False)
     except Exception as e:
