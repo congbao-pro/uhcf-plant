@@ -1,5 +1,3 @@
-# python mobilenetv3large_standalone.py --data_root /home/bigplants/dataset/bigplants-100-resized-224x224 --out_dir ./outputs --epochs 30 --batch_size 32 --lr 3e-4 --num_workers 8 --use_weighted_sampler
-
 import os
 import json
 import argparse
@@ -857,7 +855,7 @@ def create_dataset_unselected_csv(all_class_imgs: Dict[str, List[Path]],
 
 
 # -----------------------------
-# Dataset curation theo yêu cầu
+# Dataset curation
 # -----------------------------
 
 def build_selection_for_species(species_dir: Path, parts_keep=("hand","leaf","flower","fruit"), per_class_cap=100, seed=42):
@@ -874,7 +872,6 @@ def build_selection_for_species(species_dir: Path, parts_keep=("hand","leaf","fl
     sub_images = list(dict.fromkeys(sub_images))
     rng.shuffle(sub_images)
 
-    # Nếu >= cap → cắt đúng cap, ngược lại bù từ available
     if len(sub_images) >= per_class_cap:
         chosen = sub_images[:per_class_cap]
         return chosen
@@ -896,7 +893,6 @@ def scan_dataset(data_root: Path, parts_keep=("hand","leaf","flower","fruit"), p
         species = species_dir.name
         selected_paths = build_selection_for_species(species_dir, parts_keep, per_class_cap, seed)
         for img in selected_paths:
-            # xác định nguồn để tham khảo
             part_val = None
             for anc in img.parents:
                 if anc == species_dir:
@@ -1043,15 +1039,14 @@ def main():
     parser.add_argument("--num_workers", type=int, default=8)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--use_weighted_sampler", action="store_true")
-    # Quan trọng: để đúng 70:10:20, set mặc định test=0.20, val=0.10
-    parser.add_argument("--val_ratio", type=float, default=0.10, help="tỉ lệ validation trên toàn bộ dữ liệu")
-    parser.add_argument("--test_ratio", type=float, default=0.20, help="tỉ lệ test trên toàn bộ dữ liệu")
+    parser.add_argument("--val_ratio", type=float, default=0.10, help="validation ratio on the full dataset")
+    parser.add_argument("--test_ratio", type=float, default=0.20, help="test ratio on the full dataset")
     parser.add_argument("--img_size", type=int, default=224)
     args = parser.parse_args()
 
-    assert 0.0 < args.test_ratio < 0.5, "test_ratio nên hợp lý (ví dụ 0.2 cho 20%)"
-    assert 0.0 < args.val_ratio < 0.5,  "val_ratio nên hợp lý (ví dụ 0.1 cho 10%)"
-    assert args.val_ratio + args.test_ratio < 1.0, "val_ratio + test_ratio phải < 1.0"
+    assert 0.0 < args.test_ratio < 0.5, "test_ratio should be reasonable (e.g. 0.2 for 20%)"
+    assert 0.0 < args.val_ratio < 0.5,  "val_ratio should be reasonable (e.g. 0.1 for 10%)"
+    assert args.val_ratio + args.test_ratio < 1.0, "val_ratio + test_ratio must be < 1.0"
 
     set_seed(args.seed)
 
@@ -1091,7 +1086,6 @@ def main():
         random_state=args.seed,
         stratify=df["species"],
     )
-    # Để val chiếm đúng 10% tổng, cần tách từ phần 80% còn lại theo tỉ lệ 0.10 / 0.80 = 0.125
     val_ratio_adj = args.val_ratio / (1.0 - args.test_ratio)
     df_train, df_val = train_test_split(
         df_trainval,

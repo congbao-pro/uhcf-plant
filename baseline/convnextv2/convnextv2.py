@@ -1,5 +1,3 @@
-# python convnextv2s_standalone.py --data_root /home/bigplants/dataset/bigplants-100-resized-224x224 --out_dir ./outputs --epochs 30 --batch_size 32 --lr 3e-4 --num_workers 8
-
 import os
 import json
 import argparse
@@ -33,7 +31,7 @@ from tqdm import tqdm
 import timm
 from torch.amp import autocast, GradScaler
 
-DATA_ROOT_DEFAULT = r"D:\Homework\NC\bigplants_dataset_100_resized"
+DATA_ROOT_DEFAULT = "path/to/bigplants_dataset_100_resized"
 
 # -----------------------------
 # Repro & small utils

@@ -1,5 +1,3 @@
-# python efficientnetv2s_standalone.py --data_root /home/bigplants/dataset/bigplants-100-resized-224x224 --out_dir ./outputs --epochs 30 --batch_size 32 --lr 3e-4 --num_workers 8 --use_weighted_sampler
-
 import os
 import json
 import argparse
@@ -716,8 +714,6 @@ def main():
     parser.add_argument("--num_workers", type=int, default=8)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--use_weighted_sampler", action="store_true")
-
-    # To get TRAIN:VAL:TEST ≈ 70% : 10% : 20%
     parser.add_argument("--val_ratio", type=float, default=0.10, help="validation ratio on the full dataset")
     parser.add_argument("--test_ratio", type=float, default=0.20, help="test ratio on the full dataset")
     parser.add_argument("--img_size", type=int, default=224)
