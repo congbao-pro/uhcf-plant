@@ -1,33 +1,3 @@
-#!/usr/bin/env python3
-"""
-Organ-Aware Switch-ViT with K-Fold Cross-Validation for BigPlants-100
-
-Full pipeline O1–O8 with StratifiedKFold (default 5-fold):
-- O1: pseudo-label organ via clustering (TRAIN-ONLY to prevent data leakage)
-- O2: auxiliary organ head + calibration
-- O3: organ-aware router
-- O4: Switch MoE
-- O5: entropy fallback routing
-- O6: OrganMix augmentation
-- O7: capacity scheduling
-- O8: comprehensive evaluation per fold + aggregated metrics
-
-Data Leakage Prevention Features:
-- pHash-based duplicate detection across train/val/test splits
-- Automatic leakage fixing by moving duplicates to train
-- Train-only KMeans clustering with predict() for val/test
-
-Usage:
-  python organ_aware_switch_vit_kfold.py --data_root /path/to/dataset --out_dir ./outputs_kfold --n_folds 5 --epochs 40
-
-  # Disable leakage checking (faster but less safe):
-  python organ_aware_switch_vit_kfold.py --data_root /path/to/dataset --no_check_leakage
-
-Requirements:
-  pip install torch torchvision timm scikit-learn pandas tqdm pillow imagehash
-
-Author: assistant
-"""
 import os
 import sys
 import argparse

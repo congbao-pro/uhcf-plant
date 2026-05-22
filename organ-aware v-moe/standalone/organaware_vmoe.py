@@ -1,25 +1,3 @@
-#!/usr/bin/env python3
-# python organ_aware_switch_vit.py --data_root /mnt/d/NCKH/Dataset/bigplants-100-resized-224x224 --out_dir ./outputs --max_per_class 100 --epochs 10 --batch_size 16
-"""
-
-Full pipeline (toy / runnable) Organ-Aware Switch-ViT for BigPlants-100
-
-- Data selection rules per-class (hand, leaf, flower, fruit first; then seed, root, available), max 100 images per class.
-- O1: pseudo-label organ via clustering of pretrained features
-- O2: auxiliary organ head + calibration
-- O3: organ-aware router (concat token embedding + organ prior)
-- O4: Switch MoE naive dispatch (per-expert FFN)
-- O5: coarse-to-fine routing via entropy fallback (top-2)
-- O6: OrganMix augmentation (simple cut-paste on ROI masks)
-- O7: capacity scheduling (parameter)
-- O8: evaluation: Macro F1, per-class report
-
-Requirements:
-  pip install torch torchvision timm scikit-learn pandas tqdm pillow
-
-Author: assistant (adapt to your needs)
-"""
-
 import os
 import random
 import argparse
@@ -32,7 +10,7 @@ import json
 from datetime import datetime
 import pandas as pd
 import matplotlib
-matplotlib.use('Agg')  # Use non-interactive backend
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
 import time
@@ -58,7 +36,7 @@ except ImportError:
     print("          Install with: pip install imagehash")
 
 # ------------------------------
-# Utils: Dataset builder per your rules
+# Utils: Dataset builder
 # ------------------------------
 PRIOR_ORG_ORDER = ["hand", "leaf", "flower", "fruit"]   # first priority
 SECOND_ORG_ORDER = ["seed", "root"]                    # second priority
@@ -481,7 +459,7 @@ class SwitchMoE(nn.Module):
         return outputs, probs.reshape(B, T, -1), entropy.reshape(B, T)
 
 # ------------------------------
-# Organ-Aware Switch ViT model (backbone + some MoE layers + heads)
+# Organ-Aware V-MoE model (backbone + some MoE layers + heads)
 # We'll keep architecture simple: vit backbone -> extract patch tokens -> pass through one SwitchMoE -> pool CLS -> classification head
 # plus organ aux head on CLS
 # ------------------------------
@@ -1830,7 +1808,7 @@ def main(args):
                             num_workers=args.num_workers, pin_memory=True)
 
     # 6) Instantiate OrganAwareSwitchViT model
-    print("\n[STEP 6] Creating Organ-Aware Switch-ViT model...")
+    print("\n[STEP 6] Creating Organ-Aware V-MoE model...")
     model = OrganAwareSwitchViT(
         vit_name=args.vit_name, n_classes=n_classes, organ_dim=organ_dim,
         n_experts=args.n_experts, d_ff_expert=args.d_ff_expert,
@@ -1974,7 +1952,7 @@ def main(args):
     print("=" * 80)
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Organ-Aware Switch-ViT for BigPlants-100')
+    parser = argparse.ArgumentParser(description='Organ-Aware V-MoE for BigPlants-100')
 
     # Data parameters
     parser.add_argument("--data_root", type=str, required=True,

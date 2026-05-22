@@ -1,14 +1,3 @@
-#!/usr/bin/env python3
-"""
-Load best_model.pt and training_history.pt for:
-1. Detect classes for unselected images
-2. Measure inference time per image
-3. Visualize training history with detailed plots
-
-Usage:
-    python load_model_to_detect.py --model_path ./outputs/best_model.pt --history_path ./outputs/training_history.pt --unselected_csv ./outputs/dataset_unselected.csv --out_dir ./outputs/analysis
-"""
-
 import os
 import argparse
 import time
@@ -32,7 +21,7 @@ import timm
 import sys
 sys.path.append(os.path.dirname(__file__))
 
-# Model definitions (copied from organ_aware_switch_vit.py)
+# Model definitions (copied from organaware_vmoe.py)
 class OrganAuxHead(nn.Module):
     def __init__(self, in_dim, n_org):
         super().__init__()
@@ -173,8 +162,6 @@ class OrganAwareSwitchViT(nn.Module):
 def load_model(model_path, device):
     """Load trained model from checkpoint"""
     print(f"[INFO] Loading model from {model_path}")
-    # PyTorch >=2.6 mặc định weights_only=True gây lỗi Unpickling với dict checkpoint cũ.
-    # Ép weights_only=False vì file này do ta tự tạo, tin cậy nguồn.
     try:
         checkpoint = torch.load(model_path, map_location=device, weights_only=False)
     except Exception as e:
@@ -346,7 +333,6 @@ def detect_unselected_images(model, unselected_csv, class_to_idx, organ_dim, dev
 def visualize_training_history(history_path, out_dir):
     """Comprehensive visualization of training history"""
     print(f"\n[VISUALIZATION] Loading training history from {history_path}")
-    # Tương tự checkpoint, ép weights_only=False để đọc dict đầy đủ.
     try:
         history = torch.load(history_path, map_location='cpu', weights_only=False)
     except Exception as e:
