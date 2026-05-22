@@ -1,0 +1,3 @@
+type,hash,path,split,class,distance,is_cross_split
+exact_duplicate,be85c172669d3760,/home/bigplants/dataset/bigplants-100-resized-224x224/Elettaria_cardamomum/Elettaria_cardamomum_10.jpg,train,Elettaria_cardamomum,0,True
+exact_duplicate,be85c172669d3760,/home/bigplants/dataset/bigplants-100-resized-224x224/Elettaria_cardamomum/Elettaria_cardamomum_46.jpg,test,Elettaria_cardamomum,0,True

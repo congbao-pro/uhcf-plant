@@ -1,0 +1,5 @@
+type,hash,path,split,class,distance,is_cross_split,paired_with,paired_split
+exact_duplicate,b4df62688f0423bd,/home/bigplants/dataset/bigplants-100-resized-224x224/Alstonia_scholaris/hand/Alstonia_scholaris_65.jpg,val,Alstonia_scholaris,0,True,,
+exact_duplicate,b4df62688f0423bd,/home/bigplants/dataset/bigplants-100-resized-224x224/Alstonia_scholaris/hand/Alstonia_scholaris_35.jpg,test,Alstonia_scholaris,0,True,,
+near_duplicate,,/home/bigplants/dataset/bigplants-100-resized-224x224/Azadirachta_indica/fruit/Azadirachta_indica_57.jpg,val,Azadirachta_indica,2,True,/home/bigplants/dataset/bigplants-100-resized-224x224/Azadirachta_indica/fruit/Azadirachta_indica_42.jpg,test
+near_duplicate,,/home/bigplants/dataset/bigplants-100-resized-224x224/Azadirachta_indica/fruit/Azadirachta_indica_42.jpg,test,Azadirachta_indica,2,True,/home/bigplants/dataset/bigplants-100-resized-224x224/Azadirachta_indica/fruit/Azadirachta_indica_57.jpg,val

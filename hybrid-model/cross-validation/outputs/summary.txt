@@ -1,0 +1,9 @@
+Hybrid K-Fold Summary
+========================================
+n_folds: 5
+mean_test_macro_f1: 0.896210
+std_test_macro_f1: 0.007910
+mean_test_accuracy: 0.896163
+std_test_accuracy: 0.007851
+best_fold: 1
+best_fold_macro_f1: 0.906486

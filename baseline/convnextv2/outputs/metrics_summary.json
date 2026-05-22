@@ -1,0 +1,11 @@
+{
+  "test_loss": 0.36183739775575086,
+  "test_acc": 0.9155354449472096,
+  "best_val_acc": 0.9215291750503019,
+  "splits": {
+    "train": 6963,
+    "val": 994,
+    "test": 1989
+  },
+  "model": "convnextv2_tiny.fcmae_ft_in22k_in1k"
+}

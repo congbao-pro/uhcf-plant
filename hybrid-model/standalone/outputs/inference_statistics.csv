@@ -1,0 +1,2 @@
+total_images,accuracy,avg_inference_time_ms,median_inference_time_ms,std_inference_time_ms,min_inference_time_ms,max_inference_time_ms
+3091,0.8379165318667098,21.469552861722455,21.40974998474121,1.779267359827236,17.35091209411621,77.40116119384766

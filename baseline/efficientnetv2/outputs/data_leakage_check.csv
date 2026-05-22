@@ -1,0 +1,11 @@
+type,hash,path,split,class,distance,is_cross_split,paired_with
+exact_duplicate,be85c172669d3760,/home/bigplants/dataset/bigplants-100-resized-224x224/Elettaria_cardamomum/Elettaria_cardamomum_46.jpg,train,Elettaria_cardamomum,0,True,
+exact_duplicate,be85c172669d3760,/home/bigplants/dataset/bigplants-100-resized-224x224/Elettaria_cardamomum/Elettaria_cardamomum_10.jpg,val,Elettaria_cardamomum,0,True,
+exact_duplicate,b4df62688f0423bd,/home/bigplants/dataset/bigplants-100-resized-224x224/Alstonia_scholaris/hand/Alstonia_scholaris_35.jpg,train,Alstonia_scholaris,0,True,
+exact_duplicate,b4df62688f0423bd,/home/bigplants/dataset/bigplants-100-resized-224x224/Alstonia_scholaris/hand/Alstonia_scholaris_65.jpg,val,Alstonia_scholaris,0,True,
+near_duplicate,,/home/bigplants/dataset/bigplants-100-resized-224x224/Clerodendrum_villosum/flower/Clerodendrum_villosum_85.jpg,train,Clerodendrum_villosum,4,True,/home/bigplants/dataset/bigplants-100-resized-224x224/Clerodendrum_villosum/flower/Clerodendrum_villosum_77.jpg
+near_duplicate,,/home/bigplants/dataset/bigplants-100-resized-224x224/Clerodendrum_villosum/flower/Clerodendrum_villosum_77.jpg,test,Clerodendrum_villosum,4,True,/home/bigplants/dataset/bigplants-100-resized-224x224/Clerodendrum_villosum/flower/Clerodendrum_villosum_85.jpg
+near_duplicate,,/home/bigplants/dataset/bigplants-100-resized-224x224/Angelica_sinensis/hand/Angelica_sinensis_92.jpg,train,Angelica_sinensis,2,True,/home/bigplants/dataset/bigplants-100-resized-224x224/Angelica_sinensis/Angelica_sinensis_21.jpg
+near_duplicate,,/home/bigplants/dataset/bigplants-100-resized-224x224/Angelica_sinensis/Angelica_sinensis_21.jpg,val,Angelica_sinensis,2,True,/home/bigplants/dataset/bigplants-100-resized-224x224/Angelica_sinensis/hand/Angelica_sinensis_92.jpg
+near_duplicate,,/home/bigplants/dataset/bigplants-100-resized-224x224/Mangifera_indica/fruit/Mangifera_indica_94.jpg,train,Mangifera_indica,4,True,/home/bigplants/dataset/bigplants-100-resized-224x224/Mangifera_indica/fruit/Mangifera_indica_93.jpg
+near_duplicate,,/home/bigplants/dataset/bigplants-100-resized-224x224/Mangifera_indica/fruit/Mangifera_indica_93.jpg,val,Mangifera_indica,4,True,/home/bigplants/dataset/bigplants-100-resized-224x224/Mangifera_indica/fruit/Mangifera_indica_94.jpg

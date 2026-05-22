@@ -1,0 +1,9 @@
+type,hash,path,split,class,distance,is_cross_split,paired_with,paired_split
+exact,be85c172669d3760,/home/bigplants/dataset/bigplants-100-resized-224x224/Elettaria_cardamomum/Elettaria_cardamomum_10.jpg,train,Elettaria_cardamomum,0,True,,
+exact,be85c172669d3760,/home/bigplants/dataset/bigplants-100-resized-224x224/Elettaria_cardamomum/Elettaria_cardamomum_46.jpg,test,Elettaria_cardamomum,0,True,,
+near,,/home/bigplants/dataset/bigplants-100-resized-224x224/Azadirachta_indica/fruit/Azadirachta_indica_42.jpg,train,Azadirachta_indica,2,True,/home/bigplants/dataset/bigplants-100-resized-224x224/Azadirachta_indica/fruit/Azadirachta_indica_57.jpg,val
+near,,/home/bigplants/dataset/bigplants-100-resized-224x224/Azadirachta_indica/fruit/Azadirachta_indica_57.jpg,val,Azadirachta_indica,2,True,/home/bigplants/dataset/bigplants-100-resized-224x224/Azadirachta_indica/fruit/Azadirachta_indica_42.jpg,train
+near,,/home/bigplants/dataset/bigplants-100-resized-224x224/Clerodendrum_villosum/flower/Clerodendrum_villosum_77.jpg,train,Clerodendrum_villosum,4,True,/home/bigplants/dataset/bigplants-100-resized-224x224/Clerodendrum_villosum/flower/Clerodendrum_villosum_85.jpg,val
+near,,/home/bigplants/dataset/bigplants-100-resized-224x224/Clerodendrum_villosum/flower/Clerodendrum_villosum_85.jpg,val,Clerodendrum_villosum,4,True,/home/bigplants/dataset/bigplants-100-resized-224x224/Clerodendrum_villosum/flower/Clerodendrum_villosum_77.jpg,train
+near,,/home/bigplants/dataset/bigplants-100-resized-224x224/Elettaria_cardamomum/Elettaria_cardamomum_10.jpg,train,Elettaria_cardamomum,0,True,/home/bigplants/dataset/bigplants-100-resized-224x224/Elettaria_cardamomum/Elettaria_cardamomum_46.jpg,test
+near,,/home/bigplants/dataset/bigplants-100-resized-224x224/Elettaria_cardamomum/Elettaria_cardamomum_46.jpg,test,Elettaria_cardamomum,0,True,/home/bigplants/dataset/bigplants-100-resized-224x224/Elettaria_cardamomum/Elettaria_cardamomum_10.jpg,train

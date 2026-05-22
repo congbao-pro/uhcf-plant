@@ -1,0 +1,9 @@
+n_folds: 5
+model_name: dinov2_vitb14
+freeze_backbone: True
+mean_test_macro_f1: 0.9695669283953041
+std_test_macro_f1: 0.004850580673487078
+mean_test_accuracy: 0.9696319833795524
+std_test_accuracy: 0.004758774921431606
+best_fold: 2
+best_fold_macro_f1: 0.9749021316913365

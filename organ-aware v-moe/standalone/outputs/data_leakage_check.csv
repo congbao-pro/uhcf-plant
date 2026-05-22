@@ -1,0 +1,7 @@
+type,hash,path,split,class,distance,is_cross_split,paired_with,paired_split
+exact_duplicate,b4df62688f0423bd,/home/bigplants/dataset/bigplants-100-resized-224x224/Alstonia_scholaris/hand/Alstonia_scholaris_35.jpg,train,Alstonia_scholaris,0,True,,
+exact_duplicate,b4df62688f0423bd,/home/bigplants/dataset/bigplants-100-resized-224x224/Alstonia_scholaris/hand/Alstonia_scholaris_65.jpg,test,Alstonia_scholaris,0,True,,
+near_duplicate,,/home/bigplants/dataset/bigplants-100-resized-224x224/Azadirachta_indica/fruit/Azadirachta_indica_42.jpg,train,Azadirachta_indica,2,True,/home/bigplants/dataset/bigplants-100-resized-224x224/Azadirachta_indica/fruit/Azadirachta_indica_57.jpg,val
+near_duplicate,,/home/bigplants/dataset/bigplants-100-resized-224x224/Azadirachta_indica/fruit/Azadirachta_indica_57.jpg,val,Azadirachta_indica,2,True,/home/bigplants/dataset/bigplants-100-resized-224x224/Azadirachta_indica/fruit/Azadirachta_indica_42.jpg,train
+near_duplicate,,/home/bigplants/dataset/bigplants-100-resized-224x224/Plumeria_rubra/flower/Plumeria_rubra_104.jpg,train,Plumeria_rubra,4,True,/home/bigplants/dataset/bigplants-100-resized-224x224/Plumeria_rubra/flower/Plumeria_rubra_106.jpg,val
+near_duplicate,,/home/bigplants/dataset/bigplants-100-resized-224x224/Plumeria_rubra/flower/Plumeria_rubra_106.jpg,val,Plumeria_rubra,4,True,/home/bigplants/dataset/bigplants-100-resized-224x224/Plumeria_rubra/flower/Plumeria_rubra_104.jpg,train

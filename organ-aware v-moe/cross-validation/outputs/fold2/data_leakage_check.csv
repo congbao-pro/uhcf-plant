@@ -1,0 +1,7 @@
+type,hash,path,split,class,distance,is_cross_split,paired_with,paired_split
+exact_duplicate,b4df62688f0423bd,/home/bigplants/dataset/bigplants-100-resized-224x224/Alstonia_scholaris/hand/Alstonia_scholaris_35.jpg,val,Alstonia_scholaris,0,True,,
+exact_duplicate,b4df62688f0423bd,/home/bigplants/dataset/bigplants-100-resized-224x224/Alstonia_scholaris/hand/Alstonia_scholaris_65.jpg,test,Alstonia_scholaris,0,True,,
+near_duplicate,,/home/bigplants/dataset/bigplants-100-resized-224x224/Azadirachta_indica/fruit/Azadirachta_indica_42.jpg,train,Azadirachta_indica,2,True,/home/bigplants/dataset/bigplants-100-resized-224x224/Azadirachta_indica/fruit/Azadirachta_indica_57.jpg,test
+near_duplicate,,/home/bigplants/dataset/bigplants-100-resized-224x224/Azadirachta_indica/fruit/Azadirachta_indica_57.jpg,test,Azadirachta_indica,2,True,/home/bigplants/dataset/bigplants-100-resized-224x224/Azadirachta_indica/fruit/Azadirachta_indica_42.jpg,train
+near_duplicate,,/home/bigplants/dataset/bigplants-100-resized-224x224/Clerodendrum_villosum/flower/Clerodendrum_villosum_85.jpg,train,Clerodendrum_villosum,4,True,/home/bigplants/dataset/bigplants-100-resized-224x224/Clerodendrum_villosum/flower/Clerodendrum_villosum_77.jpg,test
+near_duplicate,,/home/bigplants/dataset/bigplants-100-resized-224x224/Clerodendrum_villosum/flower/Clerodendrum_villosum_77.jpg,test,Clerodendrum_villosum,4,True,/home/bigplants/dataset/bigplants-100-resized-224x224/Clerodendrum_villosum/flower/Clerodendrum_villosum_85.jpg,train
