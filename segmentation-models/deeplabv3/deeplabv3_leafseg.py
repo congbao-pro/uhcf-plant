@@ -1,25 +1,9 @@
 """
-DeepLabV3 — Leaf Segmentation
-=============================
-Train and evaluate DeepLabV3 (ResNet50 backbone) for semantic segmentation
-on leaf-seg dataset.
-
-Dataset structure:
+Leaf Disease Segmentation dataset structure:
 	leaf-seg/
 	├── images/   (*.jpg)
 	├── masks/    (*.png)
 	└── train.csv (imageid,maskid)
-
-Usage:
-python deeplabv3_leafseg.py \
-  --data_dir "D:/NCKH/Run_Models/version_4.0.0/dataset/leaf-seg" \
-  --output_dir "./output_deeplabv3" \
-  --epochs 50 \
-  --batch_size 4 \
-  --img_size 512
-
-Requirements:
-	pip install torch torchvision numpy pillow scikit-learn matplotlib seaborn tqdm opencv-python
 """
 
 import os
@@ -51,7 +35,7 @@ warnings.filterwarnings('ignore')
 
 
 # ============================================================
-# 1. JOINT TRANSFORMS (image + mask đồng bộ)
+# 1. JOINT TRANSFORMS
 # ============================================================
 
 class JointResize:
@@ -98,7 +82,6 @@ class JointRandomRotation:
 
 
 class JointColorJitter:
-	"""Chỉ áp dụng cho image, mask giữ nguyên."""
 	def __init__(self, brightness=0.3, contrast=0.3, saturation=0.3, hue=0.1):
 		self.jitter = transforms.ColorJitter(brightness, contrast, saturation, hue)
 
@@ -486,12 +469,12 @@ def plot_sample_predictions(model, dataset, device, num_classes, save_path, n=6)
 
 def main():
 	parser = argparse.ArgumentParser(
-		description='DeepLabV3 — Leaf Segmentation',
+		description='DeepLabV3 — Leaf Disease Segmentation',
 		formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
 	g = parser.add_argument_group('Data')
 	g.add_argument('--data_dir', type=str, required=True,
-				   help='Root of leaf-seg dataset (contains images/, masks/, train.csv)')
+				   help='Root of Leaf Disease Segmentation dataset (contains images/, masks/, train.csv)')
 	g.add_argument('--output_dir', type=str, default='./output_deeplabv3')
 	g.add_argument('--img_size', type=int, default=512)
 	g.add_argument('--train_ratio', type=float, default=0.7)
@@ -519,7 +502,7 @@ def main():
 
 	device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 	print(f"\n{'='*65}")
-	print('  DeepLabV3 — Leaf Segmentation')
+	print('  DeepLabV3 — Leaf Disease Segmentation')
 	print(f"{'='*65}")
 	print(f"  Device     : {device}" +
 		  (f"  ({torch.cuda.get_device_name(0)})" if device.type == 'cuda' else ''))
@@ -686,7 +669,7 @@ def main():
 	test_metrics = evaluate(model, test_loader, criterion, device, num_classes)
 
 	print(f"\n  {'='*50}")
-	print('  TEST RESULTS  (DeepLabV3 — Segmentation)')
+	print('  TEST RESULTS  (DeepLabV3 — Leaf Disease Segmentation)')
 	print(f"  {'='*50}")
 	print(f"    mIoU           : {test_metrics['mIoU'] * 100:.2f}%")
 	print(f"    Mean Dice      : {test_metrics['mean_Dice'] * 100:.2f}%")

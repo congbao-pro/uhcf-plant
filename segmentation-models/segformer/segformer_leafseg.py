@@ -1,24 +1,9 @@
 """
-SegFormer — Leaf Segmentation
-=============================
-Train/evaluate SegFormer for semantic segmentation on leaf-seg dataset.
-
-Dataset structure:
+Leaf Disease Segmentation dataset structure:
 	leaf-seg/
 	├── images/   (*.jpg)
 	├── masks/    (*.png)
-	└── train.csv (imageid, maskid)
-
-Usage:
-python segformer_leafseg.py \
-  --data_dir "D:/NCKH/Run_Models/version_4.0.0/dataset/leaf-seg" \
-  --output_dir "./output_segformer" \
-  --epochs 50 \
-  --batch_size 8 \
-  --img_size 512
-
-Requirements:
-	pip install torch torchvision transformers timm numpy pillow scikit-learn matplotlib seaborn tqdm opencv-python
+	└── train.csv (imageid,maskid)
 """
 
 import os
@@ -524,13 +509,13 @@ def plot_sample_predictions(model, dataset, device, save_path, n=6):
 
 def main():
 	parser = argparse.ArgumentParser(
-		description="SegFormer — Leaf Segmentation",
+		description="SegFormer — Leaf Disease Segmentation",
 		formatter_class=argparse.ArgumentDefaultsHelpFormatter,
 	)
 
 	g = parser.add_argument_group("Data")
 	g.add_argument("--data_dir", type=str, required=True,
-				   help="Root of leaf-seg dataset (images/, masks/, train.csv)")
+				   help="Root of Leaf Disease Segmentation dataset (images/, masks/, train.csv)")
 	g.add_argument("--output_dir", type=str, default="./output_segformer")
 	g.add_argument("--img_size", type=int, default=512)
 	g.add_argument("--train_ratio", type=float, default=0.7)
@@ -562,7 +547,7 @@ def main():
 
 	device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 	print(f"\n{'='*65}")
-	print("  SegFormer — Leaf Segmentation")
+	print("  SegFormer — Leaf Disease Segmentation")
 	print(f"{'='*65}")
 	print(f"  Device     : {device}" +
 		  (f"  ({torch.cuda.get_device_name(0)})" if device.type == "cuda" else ""))

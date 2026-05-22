@@ -1,34 +1,9 @@
 """
-Mask2Former — Leaf Segmentation
-================================
-Full Mask2Former architecture for "SEMANTIC SEGMENTATION" task
-on leaf-seg dataset (images + ground-truth masks).
-
-Architecture:
-    Image -> Swin-L Backbone -> Pixel Decoder (FPN)
-    -> Transformer Decoder (Masked Cross-Attention)
-    -> Per-query (class prediction + mask prediction)
-    -> Hungarian Matching Loss (CE + BCE + Dice)
-
-Metrics:
-    mIoU, Dice Coefficient, Pixel Accuracy (per-class & mean)
-
-Usage:
-python mask2former_leafseg_with_swin_backbone.py \
-  --data_dir "/mnt/d/NCKH/Run_Models/version_4.0.0/dataset/leaf-seg" \
-  --output_dir "./output_mask2former" \
-  --epochs 50 \
-  --batch_size 2 \
-  --img_size 384 \
-  --num_workers 2 \
-  --lr 1e-4 \
-  --backbone_lr 1e-5 \
-  --hidden_dim 256 \
-  --num_queries 50 \
-  --num_decoder_layers 4
-
-Requirements:
-    pip install torch torchvision timm numpy pillow scikit-learn matplotlib seaborn tqdm opencv-python scipy
+Leaf Disease Segmentation dataset structure:
+	leaf-seg/
+	├── images/   (*.jpg)
+	├── masks/    (*.png)
+	└── train.csv (imageid,maskid)
 """
 
 import os
@@ -70,11 +45,10 @@ warnings.filterwarnings('ignore')
 
 
 # ============================================================
-# 1. JOINT TRANSFORMS  (image + mask đồng bộ)
+# 1. JOINT TRANSFORMS
 # ============================================================
 
 class JointResize:
-    """Resize cả image và mask về cùng kích thước."""
     def __init__(self, size):
         self.size = (size, size) if isinstance(size, int) else size
 
@@ -118,7 +92,6 @@ class JointRandomRotation:
 
 
 class JointColorJitter:
-    """Chỉ áp dụng color jitter cho image, mask giữ nguyên."""
     def __init__(self, brightness=0.3, contrast=0.3, saturation=0.3, hue=0.1):
         self.jitter = transforms.ColorJitter(brightness, contrast, saturation, hue)
 
@@ -128,7 +101,6 @@ class JointColorJitter:
 
 
 class JointToTensor:
-    """Chuyển image+mask sang tensor; normalize image; map mask values."""
     MEAN = [0.485, 0.456, 0.406]
     STD  = [0.229, 0.224, 0.225]
 
@@ -152,7 +124,6 @@ class JointToTensor:
 
 
 class JointCompose:
-    """Chain nhiều joint transforms."""
     def __init__(self, tfms):
         self.tfms = tfms
 
@@ -167,15 +138,6 @@ class JointCompose:
 # ============================================================
 
 class LeafSegDataset(Dataset):
-    """Leaf segmentation dataset.
-
-    Structure:
-        root_dir/
-        ├── images/   (*.jpg)
-        ├── masks/    (*.png)
-        └── train.csv (imageid,maskid)
-    """
-
     def __init__(self, root_dir, joint_transform=None,
                  indices=None, value_mapping=None, verbose=True):
         self.root_dir   = root_dir
@@ -1177,12 +1139,12 @@ def plot_sample_predictions(model, dataset, device, img_size,
 
 def main():
     parser = argparse.ArgumentParser(
-        description='Mask2Former — Leaf Segmentation',
+        description='Mask2Former — Leaf Disease Segmentation',
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
     g = parser.add_argument_group('Data')
     g.add_argument('--data_dir',    type=str, required=True,
-                   help='Root of leaf-seg dataset (contains images/, masks/, train.csv)')
+                   help='Root of Leaf Disease Segmentation dataset (contains images/, masks/, train.csv)')
     g.add_argument('--output_dir',  type=str, default='./output_mask2former')
     g.add_argument('--img_size',    type=int, default=512)
     g.add_argument('--train_ratio', type=float, default=0.7)
@@ -1225,7 +1187,7 @@ def main():
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print(f"\n{'='*65}")
-    print(f"  Mask2Former — Leaf Segmentation")
+    print(f"  Mask2Former — Leaf Disease Segmentation")
     print(f"{'='*65}")
     print(f"  Device     : {device}" +
           (f"  ({torch.cuda.get_device_name(0)})" if device.type == 'cuda' else ''))
