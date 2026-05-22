@@ -1,27 +1,3 @@
-#!/usr/bin/env python3
-# Freeze backbone (default - linear probing):
-#   python dinov2.py --data_root /home/bigplants/dataset/bigplants-100-resized-224x224 --out_dir ./outputs --model_name dinov2_vitb14 --max_per_class 100 --epochs 40 --batch_size 16 --num_workers 8 --val_split 0.1 --test_split 0.2 --dropout 0.1 --lr 1e-3
-# Unfreeze backbone (full fine-tuning):
-#   python dinov2.py --data_root /home/bigplants/dataset/bigplants-100-resized-224x224 --out_dir ./outputs --model_name dinov2_vitb14 --unfreeze_backbone --max_per_class 100 --epochs 40 --batch_size 16 --num_workers 8 --val_split 0.1 --test_split 0.2 --dropout 0.1 --lr 1e-4
-"""
-DINOv2 for BigPlants-100 multiclass classification (100 classes).
-
-Pipeline:
-  1. Collect images per class with priority rules (hand > leaf > flower > fruit > seed > root > available)
-  2. Split train/val/test per class
-  3. Save CSVs: dataset_selected, dataset_unselected, train, val, test
-  4. pHash leakage detection + fix
-  5. Load DINOv2 backbone via torch.hub, freeze, add linear classifier head
-  6. Train with CrossEntropyLoss + AdamW + CosineAnnealingLR
-  7. Evaluate: Accuracy, Macro/Micro/Weighted F1, confusion matrix, classification report
-  8. Save best_model.pt, training_history.pt
-
-Requirements:
-  pip install torch torchvision scikit-learn pandas tqdm pillow matplotlib seaborn
-
-Author: assistant
-"""
-
 import os
 import random
 import argparse

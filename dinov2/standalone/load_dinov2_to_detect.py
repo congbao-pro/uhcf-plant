@@ -1,14 +1,3 @@
-#!/usr/bin/env python3
-"""
-Load trained DINOv2 model (best_model.pt) and training history (training_history.pt) for:
-1. Detect classes for unselected images (images not seen during train/val/test)
-2. Measure inference time per image
-3. Visualize training history with detailed plots
-
-Usage:
-    python load_dinov2_to_detect.py --model_path ./outputs/best_model.pt --history_path ./outputs/training_history.pt --unselected_csv ./outputs/dataset_unselected.csv --out_dir ./outputs/analysis
-"""
-
 import os
 import argparse
 import time

@@ -1,24 +1,3 @@
-#!/usr/bin/env python3
-# Freeze backbone (default - linear probing):
-#   python dinov2_kfold.py --data_root /mnt/d/NCKH/Dataset/bigplants-100-resized-224x224 --out_dir ./outputs_kfold --model_name dinov2_vitb14 --n_folds 5 --max_per_class 100 --batch_size 16 --epochs 25 --dropout 0.1 --num_workers 8 --val_split 0.1 --lr 1e-3 --check_leakage
-# Unfreeze backbone (full fine-tuning):
-#   python dinov2_kfold.py --data_root /home/bigplants/dataset/bigplants-100-resized-224x224 --out_dir ./outputs_kfold --model_name dinov2_vitb14 --unfreeze_backbone --n_folds 5 --epochs 40 --batch_size 16 --lr 1e-4
-"""
-DINOv2 with K-Fold Cross-Validation for BigPlants-100 (100 classes).
-
-Pipeline per fold:
-  1. StratifiedKFold split -> train+val / test
-  2. Further split train -> train / val
-  3. pHash leakage detection + fix per fold
-  4. DINOv2 backbone (frozen or unfrozen) + classifier head
-  5. Train with CrossEntropyLoss + AdamW + CosineAnnealingLR
-  6. Evaluate: Accuracy, Macro/Micro/Weighted F1, confusion matrix, classification report
-  7. Aggregate results across folds
-
-Requirements:
-  pip install torch torchvision scikit-learn pandas tqdm pillow matplotlib seaborn imagehash
-"""
-
 import os
 import random
 import argparse

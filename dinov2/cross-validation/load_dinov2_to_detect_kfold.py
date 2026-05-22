@@ -1,20 +1,3 @@
-#!/usr/bin/env python3
-"""
-Load DINOv2 K-Fold Cross-Validation results for analysis:
-1. Analyze and compare metrics across folds
-2. Compare confusion matrices
-3. Per-class performance analysis
-4. Best fold detailed visualization
-
-Usage:
-    python load_dinov2_to_detect_kfold.py --kfold_dir ./outputs_kfold --n_folds 5
-
-Differences from load_dinov2_to_detect.py:
-- Processes multiple folds instead of a single model
-- Compares metrics between folds
-- Aggregates training histories
-- Does not detect unselected images (each fold has different test set)
-"""
 import os
 import argparse
 import numpy as np
